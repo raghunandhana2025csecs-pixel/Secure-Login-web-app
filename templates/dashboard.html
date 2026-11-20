@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard | Secure Login System{% endblock %}
+
+{% block content %}
+<section class="registration-layout dashboard-layout">
+    <div class="registration-card dashboard-card">
+        <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> PROTECTED AREA</p>
+        <h1>Welcome, <span>{{ user.username }}</span></h1>
+        <p class="hero-description">You are signed in to your Secure Login System account.</p>
+
+        <dl class="account-details">
+            <div>
+                <dt>Username</dt>
+                <dd>{{ user.username }}</dd>
+            </div>
+            <div>
+                <dt>Email</dt>
+                <dd>{{ user.email }}</dd>
+            </div>
+        </dl>
+
+        <form method="post" action="{{ url_for('logout') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button class="primary-link register-button" type="submit">Log out</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

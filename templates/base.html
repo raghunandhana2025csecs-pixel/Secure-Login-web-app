@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#081322">
+    <title>{% block title %}Secure Login System{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" href="{{ url_for('index') }}" aria-label="Secure Login System home">
+            <span class="brand-mark" aria-hidden="true">S</span>
+            <span>Secure Login <span class="brand-light">System</span></span>
+        </a>
+        <nav aria-label="Main navigation">
+            {% if request.endpoint == "index" %}
+                <a class="nav-link" href="#security">Security roadmap</a>
+                <a class="nav-link" href="{{ url_for('register') }}">Create account</a>
+                <a class="nav-link" href="{{ url_for('login') }}">Log in</a>
+            {% elif request.endpoint == "register" %}
+                <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+                <a class="nav-link" href="{{ url_for('login') }}">Log in</a>
+            {% elif request.endpoint == "login" %}
+                <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+                <a class="nav-link" href="{{ url_for('register') }}">Create account</a>
+            {% elif request.endpoint == "dashboard" %}
+                <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages" aria-live="polite">
+                    {% for category, message in messages %}
+                        <p class="flash-message flash-{{ category }}"
+                           {% if category == "error" %}role="alert"{% endif %}>
+                            {{ message }}
+                        </p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <span>Secure Login System</span>
+        <span>Learning project · Built with Flask</span>
+    </footer>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

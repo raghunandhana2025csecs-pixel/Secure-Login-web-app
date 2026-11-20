@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Request not accepted | Secure Login System{% endblock %}
+
+{% block content %}
+<section class="registration-layout dashboard-layout">
+    <div class="registration-card dashboard-card">
+        <p class="eyebrow">REQUEST NOT ACCEPTED</p>
+        <h1>Form verification failed.</h1>
+        <p class="hero-description">
+            Reload the page and submit the form again.
+        </p>
+        <p class="form-footer"><a href="{{ url_for('index') }}">Return to the homepage</a></p>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Secure Login System | Home{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-copy">
+        <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> SECURITY-FIRST LEARNING PROJECT</p>
+        <h1>Building safer sign-ins,<br><span>one step at a time.</span></h1>
+        <p class="hero-description">
+            A beginner-friendly Flask project exploring the foundations of secure
+            authentication, from password protection to carefully managed sessions.
+        </p>
+        <a class="primary-link" href="#security">
+            Explore the security roadmap
+            <span aria-hidden="true">&rarr;</span>
+        </a>
+    </div>
+
+    <aside class="status-card" aria-label="Project status">
+        <div class="card-heading">
+            <span class="shield-icon" aria-hidden="true">&#9670;</span>
+            <span>PROJECT STATUS</span>
+        </div>
+        <p class="status-title">The foundation is live.</p>
+        <p class="status-detail">Authentication features will be added and tested in later phases.</p>
+        <div class="status-rule"></div>
+        <div class="status-row">
+            <span>Application</span>
+            <span class="status-value"><span class="status-dot" aria-hidden="true"></span> Running locally</span>
+        </div>
+        <div class="status-row">
+            <span>Current phase</span>
+            <span class="status-value">Flask setup</span>
+        </div>
+    </aside>
+</section>
+
+<section class="roadmap" id="security">
+    <div class="section-heading">
+        <p class="eyebrow">THE ROAD AHEAD</p>
+        <h2>Security is built in layers.</h2>
+        <p>These are project goals, not features claimed as implemented today.</p>
+    </div>
+
+    <div class="feature-grid">
+        <article class="feature-card">
+            <span class="feature-number">01</span>
+            <h3>Protected passwords</h3>
+            <p>Use bcrypt to store password hashes instead of plain-text passwords.</p>
+        </article>
+        <article class="feature-card">
+            <span class="feature-number">02</span>
+            <h3>Safer requests</h3>
+            <p>Plan for input validation, parameterized SQL, and CSRF protection.</p>
+        </article>
+        <article class="feature-card">
+            <span class="feature-number">03</span>
+            <h3>Careful sessions</h3>
+            <p>Apply sensible session and cookie settings as authentication is introduced.</p>
+        </article>
+    </div>
+</section>
+{% endblock %}

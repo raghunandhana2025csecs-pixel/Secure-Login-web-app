@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block title %}Create account | Secure Login System{% endblock %}
+
+{% block content %}
+<section class="registration-layout">
+    <div class="registration-intro">
+        <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> GET STARTED</p>
+        <h1>Create your<br><span>secure account.</span></h1>
+        <p class="hero-description">
+            Choose a username and a strong password. Your password is protected
+            before it is stored.
+        </p>
+    </div>
+
+    <div class="registration-card">
+        <h2>Create account</h2>
+        <p class="form-intro">All fields are required.</p>
+
+        <form method="post" action="{{ url_for('register') }}" data-registration-form>
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+            <div class="form-field">
+                <label for="username">Username</label>
+                <input
+                    id="username"
+                    name="username"
+                    type="text"
+                    value="{{ form_data.get('username', '') }}"
+                    minlength="3"
+                    maxlength="30"
+                    pattern="[A-Za-z0-9_]{3,30}"
+                    autocomplete="username"
+                    required
+                    aria-describedby="username-help{% if errors.get('username') %} username-error{% endif %}"
+                >
+                <small id="username-help">3–30 letters, numbers, or underscores.</small>
+                {% if errors.get("username") %}
+                    <p class="field-error" id="username-error" role="alert">{{ errors["username"] }}</p>
+                {% endif %}
+            </div>
+
+            <div class="form-field">
+                <label for="email">Email</label>
+                <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    value="{{ form_data.get('email', '') }}"
+                    maxlength="254"
+                    autocomplete="email"
+                    required
+                    {% if errors.get('email') %}aria-describedby="email-error"{% endif %}
+                >
+                {% if errors.get("email") %}
+                    <p class="field-error" id="email-error" role="alert">{{ errors["email"] }}</p>
+                {% endif %}
+            </div>
+
+            <div class="form-field">
+                <label for="password">Password</label>
+                <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    autocomplete="new-password"
+                    required
+                    aria-describedby="password-help password-byte-count{% if errors.get('password') %} password-error{% endif %}"
+                >
+                <small id="password-help">
+                    At least 8 characters with uppercase and lowercase letters, a number,
+                    and a special character. Maximum 72 UTF-8 bytes.
+                </small>
+                <small class="byte-count" id="password-byte-count" data-password-byte-count aria-live="polite">
+                    0 / 72 UTF-8 bytes
+                </small>
+                {% if errors.get("password") %}
+                    <p class="field-error" id="password-error" role="alert">{{ errors["password"] }}</p>
+                {% endif %}
+            </div>
+
+            <div class="form-field">
+                <label for="confirm_password">Confirm password</label>
+                <input
+                    id="confirm_password"
+                    name="confirm_password"
+                    type="password"
+                    autocomplete="new-password"
+                    required
+                    {% if errors.get('confirm_password') %}aria-describedby="confirm-password-error"{% endif %}
+                >
+                {% if errors.get("confirm_password") %}
+                    <p class="field-error" id="confirm-password-error" role="alert">
+                        {{ errors["confirm_password"] }}
+                    </p>
+                {% endif %}
+            </div>
+
+            <button class="primary-link register-button" type="submit">Register</button>
+        </form>
+
+        <p class="form-footer">
+            <a href="{{ url_for('index') }}">Return to the homepage</a>
+        </p>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/validation.js') }}" defer></script>
+{% endblock %}
